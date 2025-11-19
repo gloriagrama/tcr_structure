@@ -8,7 +8,7 @@
 #SBATCH --time=00:45:00
 #SBATCH -p htc
 #SBATCH -q public
-#SBATCH --array=0-7200
+#SBATCH --array=1-{# of inputs}
 
 echo "=== SLURM JOB START ==="
 echo "Node: $(hostname)"
@@ -19,10 +19,10 @@ echo "---------------------------"
 # ============================================================
 # USER SETTINGS
 # ============================================================
-ROSETTA_BIN="/scratch/ggrama/rosetta.source.release-371/main/source/bin/relax.linuxgccrelease"
+ROSETTA_BIN="/scratch/{USER}/rosetta.source.release-371/main/source/bin/relax.linuxgccrelease"
 
-INPUT_DIR="/scratch/ggrama/recomb/generated/pdbs_unrelaxed"   # <== Put your input PDBs here
-OUT_DIR="/scratch/ggrama/recomb/generated/relaxed"       # <== Relaxed outputs written here
+INPUT_DIR="/scratch/{USER}/alphafold/pdbs_unrelaxed"   
+OUT_DIR="/scratch/{USER}/alphafold/relaxed"
 
 mkdir -p "$OUT_DIR" "$OUT_DIR/logs"
 
@@ -54,7 +54,7 @@ fi
 PDB_PATH=$(sed -n "$((SLURM_ARRAY_TASK_ID + 1))p" "$FILE_LIST")
 
 if [[ -z "$PDB_PATH" ]]; then
-    echo "⚠️  No PDB path for task ${SLURM_ARRAY_TASK_ID} — skipping."
+    echo "No PDB path for task ${SLURM_ARRAY_TASK_ID} — skipping."
     exit 0
 fi
 
@@ -71,7 +71,7 @@ echo "Log: $LOG_FILE"
 # ============================================================
 
 if [[ -f "${OUT_DIR}/${BASE}_relaxed_0001.pdb" ]]; then
-    echo "⏩ Already relaxed — skipping."
+    echo "Already relaxed — skipping."
     exit 0
 fi
 
@@ -90,9 +90,9 @@ fi
 STATUS=$?
 
 if [[ $STATUS -eq 0 ]]; then
-    echo "✅ Done: $BASE"
+    echo "Done: $BASE"
 else
-    echo "❌ Relax failed for $BASE (check log)"
+    echo "Relax failed for $BASE (check log)"
 fi
 
 echo "Finished at: $(date)"
