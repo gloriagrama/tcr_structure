@@ -37,12 +37,16 @@ export SETUP_TIME="00:05:00"
 
 export PREDICT_CPUS=4
 export PREDICT_MEM="32G"
-export PREDICT_TIME="00:05:00"
+export PREDICT_TIME="00:10:00"
 export PREDICT_GPU=1
 
 export RELAX_CPUS=4
 export RELAX_MEM="16G"
-export RELAX_TIME="00:15:00"
+export RELAX_TIME="00:10:00"
+
+export RELABEL_CPUS=2
+export RELABEL_MEM="8G"
+export RELABEL_TIME="00:05:00"
 
 export INTERFACE_CPUS=4
 export INTERFACE_MEM="32G"
@@ -59,12 +63,12 @@ export MHC_CLASS=1
 # Environment setup (modify if needed)
 ###############################################################################
 
-export CONDA_ENV_PATH="/path/to/your/conda/env"
+export CONDA_ENV_PATH="/path/to/your/MAMBA/env" #mamba envs don't break as often on sol
 
 # Function to load conda environment
 load_conda_env() {
     module load mamba/latest 2>/dev/null || true
-    source activate "$CONDA_ENV_PATH" 2>/dev/null || conda activate "$CONDA_ENV_PATH"
+    source activate "$CONDA_ENV_PATH" 2>/dev/null || mamba activate "$CONDA_ENV_PATH"
 }
 
 # Function to load CUDA (for prediction step)
@@ -121,6 +125,7 @@ export TARGETS_DIR="$WORK_DIR/targets"
 export USER_OUTPUTS_DIR="$WORK_DIR/user_outputs"
 export PREDICTIONS_DIR="$WORK_DIR/predictions"
 export RELAXED_DIR="$WORK_DIR/relaxed"
+export RELABELED_DIR="$WORK_DIR/relabeled"
 export INTERFACE_SCORES_DIR="$WORK_DIR/interface_scores"
 export INTERFACE_LOGS_DIR="$WORK_DIR/interface_logs"
 export SLURM_LOGS_DIR="$WORK_DIR/slurm_logs"
@@ -131,4 +136,5 @@ export GENERATE_TARGETS_SCRIPT="$SCRIPT_DIR/01_generate_targets.py"
 export SETUP_SCRIPT="$SCRIPT_DIR/02_setup_alphafold.sh"
 export PREDICT_SCRIPT="$SCRIPT_DIR/03_run_prediction.sh"
 export RELAX_SCRIPT="$SCRIPT_DIR/04_relax_structure.sh"
+export RELABEL_SCRIPT="$SCRIPT_DIR/04b_relabel_chains.py"
 export INTERFACE_SCRIPT="$SCRIPT_DIR/05_interface_analysis.sh"
