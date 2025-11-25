@@ -1,0 +1,33 @@
+name: tcrdock_env
+channels:
+  - conda-forge
+  - nvidia
+  - defaults
+
+dependencies:
+  - python=3.10
+  - numpy=1.*              # IT installed via mamba create
+  - scipy
+  - pandas
+  - cudnn=8.9
+  - cuda-nvcc=12.0         # required by jaxlib cuda12 wheels
+  - cuda-runtime=12.0
+  - pip
+  - pip:
+      - jax==0.4.14
+      - jaxlib==0.4.14+cuda12.cudnn89
+      - tensorflow-cpu==2.12.0
+      - ml-collections==0.1.0
+      - docker==5.0.0
+      - dm-haiku==0.0.10
+      - dm-tree==0.1.8
+      - immutabledict==2.0.0
+      - biopython==1.79
+      - matplotlib==3.10.3
+      - optax==0.2.1
+      - optree==0.15.0
+      - orbax-checkpoint==0.3.4
+      - jmp==0.0.4
+      - chex==0.1.7
+      - ml-dtypes==0.3.2
+      - humanize
