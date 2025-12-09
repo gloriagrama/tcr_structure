@@ -98,6 +98,7 @@ You can also adjust:
 1. Edit `00_config.sh` with your paths
 2. Run the pipeline:
 ```bash
+tmux new -s tcrpipe
 bash run_pipeline.sh
 ```
 
