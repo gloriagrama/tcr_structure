@@ -42,7 +42,7 @@ export PREDICT_GPU=1
 
 export RELAX_CPUS=4
 export RELAX_MEM="16G"
-export RELAX_TIME="00:10:00"
+export RELAX_TIME="00:15:00"
 
 export RELABEL_CPUS=2
 export RELABEL_MEM="8G"
