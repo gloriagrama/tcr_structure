@@ -37,12 +37,12 @@ export SETUP_TIME="00:02:00"
 
 export PREDICT_CPUS=4
 export PREDICT_MEM="32G"
-export PREDICT_TIME="00:15:00"
+export PREDICT_TIME="00:30:00"
 export PREDICT_GPU=1
 
 export RELAX_CPUS=4
 export RELAX_MEM="16G"
-export RELAX_TIME="00:20:00"
+export RELAX_TIME="00:30:00"
 
 export RELABEL_CPUS=2
 export RELABEL_MEM="8G"
